@@ -24,7 +24,8 @@ body {
   height: 98px;
   border-radius: 5px;
   border: yellow 1px solid;
-  padding: 10px 10px
+  padding: 10px 10px;
+  float: left;
 }
 
 img {

@@ -1,7 +1,7 @@
 fetch('http://kde.link/test/get_field_size.php')
   .then(response => {
     return response.json();
-  }).then(data => getData(data))
+  }).then(createCard)
   .catch(() => console.log('Can\'t get response'));
 
 let picturesLinks = [
@@ -20,6 +20,7 @@ let picturesLinks = [
 const table = document.getElementById('gameTable');
 
 function createCard (data) {
+  let tableSize = data.width * data.height;
   table.style.width = data.width * 120 + 'px';
   table.style.height = data.height * 120 + 'px';
   for(let i = 0; i < data.width; i++){
@@ -32,4 +33,15 @@ function createCard (data) {
       table.appendChild(card);
     }
   }
+  console.log(tableSize)
+  function randomPos(tableSize) {
+    let numberArr = [];
+    for(let i = 0; i < tableSize; i++){
+      let randomNum = Math.floor(Math.random() * 10);
+      numberArr.push(randomNum);
+    }
+    console.log(tableSize)
+  }
+
+  randomPos();
 }
