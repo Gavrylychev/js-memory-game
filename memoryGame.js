@@ -38,14 +38,12 @@ function createCard (data) {
     .map((a) => a.value);
     console.log(shuffledArr)
 
-  for(let i = 0; i < data.width; i++){
-    for(let j = 0; j < data.height; j++){
+  for(let i = 0; i < data.width * data.height; i++){
       let card = document.createElement('div');
       let img = document.createElement('img');
       card.className = 'card';
       img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
       card.appendChild(img);
       table.appendChild(card);
-    }
   }
 }
