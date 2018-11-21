@@ -23,25 +23,29 @@ function createCard (data) {
   let tableSize = data.width * data.height;
   table.style.width = data.width * 120 + 'px';
   table.style.height = data.height * 120 + 'px';
+  console.log(tableSize)
+
+  let numberArr = [];
+  for(let i = 0; i < tableSize/2; i++){
+    let randomNum = Math.floor(Math.random() * 10);
+    numberArr.push(randomNum,randomNum);
+  }
+  console.log(numberArr)
+
+  let shuffledArr = numberArr
+    .map((a) => ({sort: Math.random(), value: a}))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value);
+    console.log(shuffledArr)
+
   for(let i = 0; i < data.width; i++){
     for(let j = 0; j < data.height; j++){
       let card = document.createElement('div');
       let img = document.createElement('img');
       card.className = 'card';
-      img.src = picturesLinks[j];
+      img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
       card.appendChild(img);
       table.appendChild(card);
     }
   }
-  console.log(tableSize)
-  function randomPos(tableSize) {
-    let numberArr = [];
-    for(let i = 0; i < tableSize; i++){
-      let randomNum = Math.floor(Math.random() * 10);
-      numberArr.push(randomNum);
-    }
-    console.log(tableSize)
-  }
-
-  randomPos();
 }
