@@ -29,8 +29,7 @@ function getData(data){
   table.style.width = data.width * 120 + 'px';
   table.style.height = data.height * 120 + 'px';
 
-  // createCard(tableSize);
-  createBackCard(tableSize);
+  createCard(tableSize);
   // shuffleArr(tableSize);
 }
 
@@ -49,22 +48,15 @@ function shuffleArr(tableSize){
       console.log(shuffledArr)
 }
 
-function createCard (tableSize, shuffledArr) {
+function createCard(tableSize) {
   for(let i = 0; i < tableSize; i++){
       let card = document.createElement('div');
+      let back = document.createElement('div');
+      let front = document.createElement('div');
       let img = document.createElement('img');
+      back.className = 'back';
+      front.className = 'front';
       card.className = 'card';
-      // img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
-      card.appendChild(img);
-      table.appendChild(card);
-  }
-}
-
-function createBackCard(tableSize) {
-  for(let i = 0; i < tableSize; i++){
-      let card = document.createElement('div');
-      let img = document.createElement('img');
-      card.className = 'back';
       // img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
       card.addEventListener('click', function(e){
         let clicked = e.target;
@@ -73,7 +65,9 @@ function createBackCard(tableSize) {
         }
         clicked.classList.add('selected');
       })
-      card.appendChild(img);
+      front.appendChild(img);
+      card.appendChild(back);
+      card.appendChild(front);
       table.appendChild(card);
   }
 }
