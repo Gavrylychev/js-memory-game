@@ -23,14 +23,14 @@ let secondGuess = '';
 let count = 0;
 let previousTarget = null;
 let delay = 1200;
+let shuffledArr;
 
 function getData(data){
   let tableSize = data.width * data.height;
   table.style.width = data.width * 120 + 'px';
   table.style.height = data.height * 120 + 'px';
-
+  shuffleArr(tableSize);
   createCard(tableSize);
-  // shuffleArr(tableSize);
 }
 
 function shuffleArr(tableSize){
@@ -39,13 +39,11 @@ function shuffleArr(tableSize){
       let randomNum = Math.floor(Math.random() * 10);
       numberArr.push(randomNum,randomNum);
     }
-    console.log(numberArr)
 
-    let shuffledArr = numberArr
+    shuffledArr = numberArr
       .map((a) => ({sort: Math.random(), value: a}))
       .sort((a, b) => a.sort - b.sort)
       .map((a) => a.value);
-      console.log(shuffledArr)
 }
 
 function createCard(tableSize) {
@@ -57,7 +55,7 @@ function createCard(tableSize) {
       back.className = 'back';
       front.className = 'front';
       card.className = 'card';
-      // img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
+      img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
       card.addEventListener('click', function(e){
         let clicked = e.target;
         if(count < 2){
