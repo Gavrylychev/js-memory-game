@@ -10,7 +10,7 @@ body {
 
 #gameTable {
   margin: auto;
-  border: 1px solid red;
+  border: 10px solid black;
   border-radius: 5px;
 }
 
@@ -23,11 +23,28 @@ body {
   width: 98px;
   height: 98px;
   border-radius: 5px;
-  border: yellow 1px solid;
+  border: white 1px solid;
   padding: 10px 10px;
   float: left;
 }
 
 img {
   width: 100%;
+}
+
+.back {
+  z-index: 2;
+  background-color: black;
+  width: 98px;
+  height: 98px;
+  border-radius: 5px;
+  border: white 1px solid;
+  padding: 10px 10px;
+  float: left;
+}
+
+.selected {
+  border: 1px solid red;
+  border-radius: 5px;
+  transform: rotate(180deg);
 }

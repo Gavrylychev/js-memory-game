@@ -1,7 +1,7 @@
 fetch('http://kde.link/test/get_field_size.php')
   .then(response => {
     return response.json();
-  }).then(createCard)
+  }).then(getData)
   .catch(() => console.log('Can\'t get response'));
 
 let picturesLinks = [
@@ -18,31 +18,61 @@ let picturesLinks = [
 ];
 
 const table = document.getElementById('gameTable');
+let firstGuess = '';
+let secondGuess = '';
+let count = 0;
+let previousTarget = null;
+let delay = 1200;
 
-function createCard (data) {
+function getData(data){
   let tableSize = data.width * data.height;
   table.style.width = data.width * 120 + 'px';
   table.style.height = data.height * 120 + 'px';
-  console.log(tableSize)
 
+  // createCard(tableSize);
+  createBackCard(tableSize);
+  // shuffleArr(tableSize);
+}
+
+function shuffleArr(tableSize){
   let numberArr = [];
-  for(let i = 0; i < tableSize/2; i++){
-    let randomNum = Math.floor(Math.random() * 10);
-    numberArr.push(randomNum,randomNum);
-  }
-  console.log(numberArr)
+    for(let i = 0; i < tableSize/2; i++){
+      let randomNum = Math.floor(Math.random() * 10);
+      numberArr.push(randomNum,randomNum);
+    }
+    console.log(numberArr)
 
-  let shuffledArr = numberArr
-    .map((a) => ({sort: Math.random(), value: a}))
-    .sort((a, b) => a.sort - b.sort)
-    .map((a) => a.value);
-    console.log(shuffledArr)
+    let shuffledArr = numberArr
+      .map((a) => ({sort: Math.random(), value: a}))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value);
+      console.log(shuffledArr)
+}
 
-  for(let i = 0; i < data.width * data.height; i++){
+function createCard (tableSize, shuffledArr) {
+  for(let i = 0; i < tableSize; i++){
       let card = document.createElement('div');
       let img = document.createElement('img');
       card.className = 'card';
-      img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
+      // img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
+      card.appendChild(img);
+      table.appendChild(card);
+  }
+}
+
+function createBackCard(tableSize) {
+  for(let i = 0; i < tableSize; i++){
+      let card = document.createElement('div');
+      let img = document.createElement('img');
+      card.className = 'back';
+      // img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
+      card.addEventListener('click', function(e){
+        let clicked = e.target;
+        if(count < 2){
+          count++;
+        }
+        clicked.classList.add('selected');
+      })
       card.appendChild(img);
       table.appendChild(card);
   }
