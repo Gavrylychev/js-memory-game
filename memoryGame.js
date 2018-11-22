@@ -22,7 +22,7 @@ let firstGuess = '';
 let secondGuess = '';
 let count = 0;
 let previousTarget = null;
-let delay = 1200;
+let delay = 1000;
 let shuffledArr;
 
 function getData(data){
@@ -53,6 +53,17 @@ const match = () => {
   });
 }
 
+const resetGuesses = () => {
+  firstGuess = '';
+  secondGuess = '';
+  count = 0;
+
+  var selected = document.querySelectorAll('selected');
+  selected.forEach(back => {
+    back.classList.remove('selected');
+  })
+}
+
 function createCard(tableSize) {
   for(let i = 0; i < tableSize; i++){
       let card = document.createElement('div');
@@ -67,20 +78,29 @@ function createCard(tableSize) {
 
       back.addEventListener('click', function(e){
         let clicked = e.target;
-        console.log(e.target);
+        // console.log(clicked[0],clicked[1]);
         if(clicked === previousTarget){return}
         if(count < 2){
           count++;
+
           if(count === 1){
+            // clicked.style.display = 'none';
             firstGuess = clicked.dataset.name;
+            console.log(firstGuess)
             clicked.classList.add('selected');
           }else{
+            // clicked.style.display = 'none';
             secondGuess = clicked.dataset.name;
+            console.log(secondGuess)
             clicked.classList.add('selected');
           }
+
           if(firstGuess !== '' && secondGuess !== ''){
             if(firstGuess === secondGuess){
-              match();
+              setTimeout(match, delay);
+              setTimeout(resetGuesses, delay);
+            }else{
+              setTimeout(resetGuesses, delay);
             }
           }
           previousTarget = clicked;

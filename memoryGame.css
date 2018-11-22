@@ -44,6 +44,7 @@ img {
   height: 98px;
   border-radius: 5px;
   border: white 1px solid;
+  /* display: none; */
 }
 
 .back {
@@ -55,6 +56,7 @@ img {
   height: 98px;
   border-radius: 5px;
   border: white 1px solid;
+  display: block;
 }
 
 .selected {
