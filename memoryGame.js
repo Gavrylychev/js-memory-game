@@ -18,8 +18,8 @@ let picturesLinks = [
 ];
 
 const table = document.getElementById('gameTable');
-let firstGuess = '';
-let secondGuess = '';
+let firstGuess;
+let secondGuess;
 let count = 0;
 let previousTarget = null;
 let delay = 1000;
@@ -51,6 +51,18 @@ const match = () => {
   selected.forEach(back => {
     back.classList.add('match');
   });
+  resetMatch();
+}
+
+const resetMatch = () => {
+  firstGuess = '';
+  secondGuess = '';
+  count = 0;
+
+  let selected = document.querySelectorAll('.selected');
+  selected.forEach(back => {
+    back.classList.remove('selected');
+  })
 }
 
 const resetGuesses = () => {
@@ -58,9 +70,10 @@ const resetGuesses = () => {
   secondGuess = '';
   count = 0;
 
-  var selected = document.querySelectorAll('selected');
+  var selected = document.querySelectorAll('.selected');
   selected.forEach(back => {
     back.classList.remove('selected');
+    back.style.display = 'block';
   })
 }
 
@@ -76,29 +89,26 @@ function createCard(tableSize) {
       back.dataset.name = shuffledArr[i];
       img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
 
-      back.addEventListener('click', function(e){
+      back.addEventListener('click', e => {
         let clicked = e.target;
-        // console.log(clicked[0],clicked[1]);
+
         if(clicked === previousTarget){return}
         if(count < 2){
           count++;
 
           if(count === 1){
-            // clicked.style.display = 'none';
+            clicked.style.display = 'none';
             firstGuess = clicked.dataset.name;
-            console.log(firstGuess)
             clicked.classList.add('selected');
           }else{
-            // clicked.style.display = 'none';
+            clicked.style.display = 'none';
             secondGuess = clicked.dataset.name;
-            console.log(secondGuess)
             clicked.classList.add('selected');
           }
 
-          if(firstGuess !== '' && secondGuess !== ''){
+          if(firstGuess && secondGuess){
             if(firstGuess === secondGuess){
-              setTimeout(match, delay);
-              setTimeout(resetGuesses, delay);
+              match();
             }else{
               setTimeout(resetGuesses, delay);
             }

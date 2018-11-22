@@ -33,22 +33,17 @@ img {
   border-radius: 5px;
   border: white 1px solid;
   margin: 10px;
-  /* transition: all .4s linear;
-  transform-style: preserve-3d; */
 }
 
 .front {
-  backface-visibility: hidden;
   position: absolute;
   width: 98px;
   height: 98px;
   border-radius: 5px;
   border: white 1px solid;
-  /* display: none; */
 }
 
 .back {
-  backface-visibility: hidden;
   z-index: 2;
   position: absolute;
   background-color: black;
@@ -62,11 +57,9 @@ img {
 .selected {
   border: 1px solid red;
   border-radius: 5px;
-  transform: rotate(180deg);
 }
 
 .match {
   border: 1px solid blue;
   border-radius: 5px;
-  background-color: none;
 }
