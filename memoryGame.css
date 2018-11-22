@@ -32,7 +32,9 @@ img {
   height: 98px;
   border-radius: 5px;
   border: white 1px solid;
-  padding: 10px 10px;
+  margin: 10px;
+  /* transition: all .4s linear;
+  transform-style: preserve-3d; */
 }
 
 .front {
@@ -43,7 +45,6 @@ img {
   border-radius: 5px;
   border: white 1px solid;
 }
-
 
 .back {
   backface-visibility: hidden;
@@ -60,4 +61,10 @@ img {
   border: 1px solid red;
   border-radius: 5px;
   transform: rotate(180deg);
+}
+
+.match {
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: none;
 }

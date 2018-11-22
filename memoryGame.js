@@ -46,6 +46,13 @@ function shuffleArr(tableSize){
       .map((a) => a.value);
 }
 
+const match = () => {
+  let selected = document.querySelectorAll('.selected');
+  selected.forEach(back => {
+    back.classList.add('match');
+  });
+}
+
 function createCard(tableSize) {
   for(let i = 0; i < tableSize; i++){
       let card = document.createElement('div');
@@ -55,13 +62,29 @@ function createCard(tableSize) {
       back.className = 'back';
       front.className = 'front';
       card.className = 'card';
+      back.dataset.name = shuffledArr[i];
       img.src = `https://kde.link/test/${shuffledArr[i]}.png`;
-      card.addEventListener('click', function(e){
+
+      back.addEventListener('click', function(e){
         let clicked = e.target;
+        console.log(e.target);
+        if(clicked === previousTarget){return}
         if(count < 2){
           count++;
+          if(count === 1){
+            firstGuess = clicked.dataset.name;
+            clicked.classList.add('selected');
+          }else{
+            secondGuess = clicked.dataset.name;
+            clicked.classList.add('selected');
+          }
+          if(firstGuess !== '' && secondGuess !== ''){
+            if(firstGuess === secondGuess){
+              match();
+            }
+          }
+          previousTarget = clicked;
         }
-        clicked.classList.add('selected');
       })
       front.appendChild(img);
       card.appendChild(back);
